@@ -31,6 +31,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
   private getHttpException(exception: unknown) {
     if (exception instanceof HttpException) {
+      console.log(exception.getResponse());
       return exception;
     }
 
@@ -38,6 +39,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
       return new BadRequestException(exception.message);
     }
 
-    return new InternalServerErrorException({});
+    if (exception instanceof Error) {
+      return new InternalServerErrorException(exception.message);
+    }
+
+    return new InternalServerErrorException('Server Error');
   }
 }
