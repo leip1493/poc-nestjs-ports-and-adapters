@@ -4,7 +4,7 @@ export class SqliteTypeormClient {
   static create() {
     return TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'in-memory-db',
+      database: ':memory:',
       synchronize: true,
       autoLoadEntities: true,
     });
