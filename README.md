@@ -16,6 +16,20 @@ Proof of concept implementing port and adapter architecture using nestjs
 $ npm install
 ```
 
+
+## Running the app
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
 ## Folder structure
 ```
 .
@@ -59,18 +73,6 @@ $ npm install
             └── UserEmailMother.ts
 ```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
 
 ## Test
 
