@@ -15,6 +15,49 @@ Proof of concept implementing port and adapter architecture using nestjs
 $ npm install
 ```
 
+## Folder structure
+```
+.
+├── src
+│   ├── user
+│   │   ├── domain
+│   │   │   ├── UserRepository.ts
+│   │   │   └── User.ts
+│   │   ├── application
+│   │   │   ├── get-all-users/ 
+│   │   │   └── user-creator
+│   │   │       ├── UserCreator.ts
+│   │   │       ├── UserCreatorRequest.ts
+│   │   │       └── UserCreator.spec.ts     
+│   │   └── infrastructure
+│   │       ├── dto
+│   │       │   └── create-user.dto.ts
+│   │       ├── persistence
+│   │       │   └── typeorm
+│   │       │       ├── TypeormUser.ts
+│   │       │       └── TypeormUserRepository.ts        
+│   │       ├── user.controller.ts
+│   │       ├── user.module.ts
+│   │       └── user.service.ts
+│   ├── shared
+│   │   ├── domain
+│   │   │   ├── exceptions/
+│   │   │   └── value-objects/
+│   │   │       ├── Uuid.ts
+│   │   │       └── MongoId.ts
+│   │   └── infrastructure
+│   │       └── persistence
+│   │           ├── typeorm/          
+│   │           ├── mongo/
+│   │           └── redis/        
+│   └── main.ts
+└── test
+    └── user
+        └── domain
+            ├── UserMother.ts
+            └── UserEmailMother.ts
+```
+
 ## Running the app
 
 ```bash
