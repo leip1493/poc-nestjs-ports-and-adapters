@@ -8,7 +8,10 @@
 
 ## Description
 
-Proof of concept implementing port and adapter architecture using nestjs
+## Description
+
+This repository serves as a proof of concept for implementing the Ports and Adapters (Hexagonal) architecture pattern using NestJS. The structure emphasizes a clear separation between application logic and external dependencies, promoting maintainability and testability.
+
 
 ## Installation
 
