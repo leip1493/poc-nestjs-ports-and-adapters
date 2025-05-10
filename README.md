@@ -113,3 +113,5 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/leip1493/poc-nestjs-ports-and-adapters)
