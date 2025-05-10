@@ -1,3 +1,4 @@
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>  
   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF7pFog-jh7-T4VXWO84RPFAZCZI0UZc9KyQ&usqp=CAU" width="200" alt="Ports and adapters" />
@@ -7,6 +8,7 @@
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
 ## Description
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/leip1493/poc-nestjs-ports-and-adapters)
 
 This repository serves as a proof of concept for implementing the Ports and Adapters (Hexagonal) architecture pattern using NestJS. The structure emphasizes a clear separation between application logic and external dependencies, promoting maintainability and testability.
 
@@ -113,5 +115,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
-
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/leip1493/poc-nestjs-ports-and-adapters)
