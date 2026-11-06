@@ -1,142 +1,80 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>  
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF7pFog-jh7-T4VXWO84RPFAZCZI0UZc9KyQ&usqp=CAU" width="200" alt="Ports and adapters" />
+  <a href="https://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# NestJS · Ports and Adapters template
 
-## Description
+A starting point for NestJS services built with the Ports and Adapters (Hexagonal) architecture: domain logic is isolated from frameworks and infrastructure, and every layer is tested.
 
-This repository serves as a proof of concept for implementing the Ports and Adapters (Hexagonal) architecture pattern using NestJS. The structure emphasizes a clear separation between application logic and external dependencies, promoting maintainability and testability.
+**Stack:** Node.js 24 · NestJS 12 · TypeScript 6 · TypeORM 1 + SQLite (in memory) · Jest 30 · oxlint · Docker
 
+## Start a new project from this template
 
-## Requirements
-
-- Node.js 24 (`nvm use`)
-
-## Installation
-
-```bash
-$ npm install
-```
+1. Copy the repository without its history: use **Use this template** on GitHub, or `npx degit leip1493/poc-nestjs-ports-and-adapters my-service`.
+2. Set `name`, `description` and `author` in `package.json`.
+3. Install and check that everything passes:
+   ```bash
+   nvm use 24        # Node >= 24.15 (nvm-windows: nvm use 24)
+   npm install
+   npm test && npm run test:e2e && npm run lint
+   ```
+4. Use the `user` module as the reference for your own modules: [docs/agents/architecture.md](docs/agents/architecture.md#adding-a-new-module-example-product).
 
 ## Running the app
-Running Locally
-- Using Docker
-Development, with hot reload (`Dockerfile.dev`):
-```bash
-docker compose up
-```
 
-The source code is mounted into the container and `npm run start:dev` recompiles and restarts on every change (a few seconds, it uses polling so it also works on Windows/macOS).
-Rebuild only when `package.json` changes:
-```bash
-docker compose up --build --renew-anon-volumes
-```
-
-Production image (`Dockerfile`):
-```bash
-docker build -t poc-nestjs-ports-and-adapters .
-docker run -p 3000:3000 poc-nestjs-ports-and-adapters
-```
-
-Both start the NestJS application with an in-memory SQLite database (better-sqlite3).
-Access the application at http://localhost:3000 (Swagger UI at http://localhost:3000/api)
-
-- Without Docker
-If you prefer not to use Docker, you can run the application locally with the following command:
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Folder structure
-```
-.
-├── src
-│   ├── user
-│   │   ├── domain
-│   │   │   ├── UserRepository.ts
-│   │   │   └── User.ts
-│   │   ├── application
-│   │   │   ├── get-all-users/ 
-│   │   │   └── user-creator
-│   │   │       ├── UserCreator.ts
-│   │   │       └── UserCreatorRequest.ts
-│   │   └── infrastructure
-│   │       ├── dto
-│   │       │   └── create-user.dto.ts
-│   │       ├── persistence
-│   │       │   └── typeorm
-│   │       │       ├── TypeormUser.ts
-│   │       │       └── TypeormUserRepository.ts        
-│   │       ├── user.controller.ts
-│   │       ├── user.module.ts
-│   │       └── user.service.ts
-│   ├── shared
-│   │   ├── domain
-│   │   │   ├── exceptions/
-│   │   │   └── value-objects/
-│   │   │       ├── Uuid.ts
-│   │   │       └── MongoId.ts
-│   │   └── infrastructure
-│   │       └── persistence
-│   │           ├── typeorm/          
-│   │           ├── mongo/
-│   │           └── redis/        
-│   └── main.ts
-└── test                          # mirror of src/: all tests live here
-    ├── user
-    │   ├── domain                # Object Mothers (test data)
-    │   │   ├── UserMother.ts
-    │   │   └── UserEmailMother.ts
-    │   └── application
-    │       ├── get-all-users/
-    │       │   └── GetAllUsers.spec.ts
-    │       └── user-creator/
-    │           └── UserCreator.spec.ts
-    └── app.e2e-spec.ts
-```
-
-`src/` contains production code only: no specs, Object Mothers or test libraries (`npm run lint` enforces it).
-
-
-## Path aliases
-
-Two generic aliases, defined once in `tsconfig.json` (`paths`), work for any new module without extra config:
-
-| Alias | Points to | Example |
+| | Command | Notes |
 |---|---|---|
-| `@/*` | `src/*` | `import { User } from '@/user/domain/User';` |
-| `@test/*` | `test/*` | `import { UserMother } from '@test/user/domain/UserMother';` |
+| Docker, development | `docker compose up` | Hot reload. Source is mounted into the container. After changing `package.json`: `docker compose up --build --renew-anon-volumes` |
+| Docker, production | `docker build -t my-service . && docker run -p 3000:3000 my-service` | Multi-stage image, no dev dependencies |
+| Local | `npm run start:dev` | Watch mode. `npm run start:prod` runs the build in `dist/` |
 
-Same-folder imports stay relative (`./UserCreatorRequest`). `nest build` rewrites the aliases to relative paths in `dist`, and Jest maps them in `jest.config.js` / `test/jest-e2e.json`.
+The app runs on http://localhost:3000 (`PORT` changes it). Swagger UI: http://localhost:3000/api.
 
-## Test
+### Endpoints
 
-```bash
-# unit tests
-$ npm run test
+| Method | Path | Result |
+|---|---|---|
+| `GET` | `/` | Health check |
+| `POST` | `/user` | Creates a user `{ name, email }`. 400 if invalid |
+| `GET` | `/user` | Lists users |
+| `GET` | `/user/:id` | Finds a user. 400 if the id is not a UUID, 404 if it doesn't exist |
 
-# e2e tests
-$ npm run test:e2e
+## Architecture
 
-# test coverage
-$ npm run test:cov
+```
+src/
+├── user/                         # one folder per module (bounded context)
+│   ├── domain/                   # entity, value objects, port (UserRepository), UserNotFound
+│   ├── application/              # use cases: user-creator/, get-all-users/, user-finder/
+│   └── infrastructure/           # Nest module, controller, DTOs, persistence/ (TypeORM adapter)
+├── shared/
+│   ├── domain/                   # base exceptions (InvalidArgument, NotFound), Uuid
+│   └── infrastructure/           # exception filter (domain errors -> HTTP), DB client
+├── app.module.ts
+└── main.ts
+test/                             # mirror of src/: every test lives here
+├── user/
+│   ├── domain/                   # Object Mothers + entity and value object specs
+│   ├── application/              # use case specs (ports mocked)
+│   └── infrastructure/           # adapter integration specs (real in-memory DB)
+├── shared/
+└── app.e2e-spec.ts               # e2e
 ```
 
-## Support
+- Dependencies point inwards: `infrastructure -> application -> domain`.
+- `src/` contains production code only: no specs, Object Mothers or test libraries (`npm run lint` enforces it).
+- Imports use two generic aliases: `@/*` -> `src/*` and `@test/*` -> `test/*`.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Tests
 
-## License
+```bash
+npm test            # unit + integration (test/**/*.spec.ts)
+npm run test:e2e    # e2e (test/**/*.e2e-spec.ts)
+npm run test:cov    # coverage
+```
 
-Nest is [MIT licensed](LICENSE).
+Features are built test-first (TDD).
+
+## Working with AI agents
+
+Rules and context for coding agents live in [AGENTS.md](AGENTS.md) (Claude Code reads it through `CLAUDE.md`). It is a short index: the detail is in [docs/agents/](docs/agents/), loaded only when a task needs it.

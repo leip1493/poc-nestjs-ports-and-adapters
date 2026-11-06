@@ -5,12 +5,18 @@ import {
   ExceptionFilter,
   HttpException,
   InternalServerErrorException,
+  Logger,
+  NotFoundException,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 import { InvalidArgument } from '@/shared/domain/exceptions/InvalidArgument';
+import { NotFound } from '@/shared/domain/exceptions/NotFound';
 
+/** Maps domain exceptions to HTTP responses. Anything unexpected is logged and becomes a generic 500. */
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
+  private readonly logger = new Logger(AllExceptionsFilter.name);
+
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
   catch(exception: unknown, host: ArgumentsHost): void {
@@ -29,20 +35,17 @@ export class AllExceptionsFilter implements ExceptionFilter {
     );
   }
 
-  private getHttpException(exception: unknown) {
-    if (exception instanceof HttpException) {
-      console.log(exception.getResponse());
-      return exception;
-    }
-
-    if (exception instanceof InvalidArgument) {
+  private getHttpException(exception: unknown): HttpException {
+    if (exception instanceof HttpException) return exception;
+    if (exception instanceof InvalidArgument)
       return new BadRequestException(exception.message);
-    }
+    if (exception instanceof NotFound)
+      return new NotFoundException(exception.message);
 
-    if (exception instanceof Error) {
-      return new InternalServerErrorException(exception.message);
-    }
-
-    return new InternalServerErrorException('Server Error');
+    // Never leak internal error details to the client.
+    this.logger.error(
+      exception instanceof Error ? exception.stack : String(exception),
+    );
+    return new InternalServerErrorException();
   }
 }

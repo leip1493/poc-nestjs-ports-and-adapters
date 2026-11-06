@@ -2,6 +2,12 @@ import { UserEmail } from './UserEmail';
 import { UserId } from './UserId';
 import { UserName } from './UserName';
 
+export interface UserPrimitives {
+  id: string;
+  name: string;
+  email: string;
+}
+
 export class User {
   constructor(
     readonly id: UserId,
@@ -9,15 +15,16 @@ export class User {
     readonly email: UserEmail,
   ) {}
 
-  static create(params: { id: string; name: string; email: string }) {
-    return new User(
-      new UserId(params.id),
-      new UserName(params.name),
-      new UserEmail(params.email),
-    );
+  /**
+   * A brand-new user. Rules or side effects that only apply on creation
+   * (e.g. recording a `UserCreated` domain event) belong here.
+   */
+  static create(params: UserPrimitives): User {
+    return User.fromPrimitives(params);
   }
 
-  static fromPrimitives(data: { id: string; name: string; email: string }) {
+  /** Rebuilds an existing user, e.g. from the database. No creation side effects. */
+  static fromPrimitives(data: UserPrimitives): User {
     return new User(
       new UserId(data.id),
       new UserName(data.name),
@@ -25,7 +32,7 @@ export class User {
     );
   }
 
-  toPrimitives() {
+  toPrimitives(): UserPrimitives {
     return {
       id: this.id.value,
       name: this.name.value,

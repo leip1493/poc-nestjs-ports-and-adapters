@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SqliteTypeormClient } from './shared/infrastructure/persistence/typeorm/SqliteTypeormClient';
@@ -18,6 +17,4 @@ import { APP_FILTER } from '@nestjs/core';
     },
   ],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) {}
-}
+export class AppModule {}

@@ -1,4 +1,4 @@
-export class FindAllUserResponseDto {
+export class UserResponseDto {
   id: string;
 
   name: string;
