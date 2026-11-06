@@ -1,7 +1,7 @@
 import { MockProxy, mock } from 'jest-mock-extended';
 import { UserMother } from '@test/user/domain/UserMother';
 import { UserRepository } from '@/user/domain/UserRepository';
-import { GetAllUsers } from './GetAllUsers';
+import { GetAllUsers } from '@/user/application/get-all-users/GetAllUsers';
 
 describe('GetAllUsers', () => {
   let mockRepository: MockProxy<UserRepository>;

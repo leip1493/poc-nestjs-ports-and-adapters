@@ -70,8 +70,7 @@ $ npm run start:prod
 │   │   │   ├── get-all-users/ 
 │   │   │   └── user-creator
 │   │   │       ├── UserCreator.ts
-│   │   │       ├── UserCreatorRequest.ts
-│   │   │       └── UserCreator.spec.ts     
+│   │   │       └── UserCreatorRequest.ts
 │   │   └── infrastructure
 │   │       ├── dto
 │   │       │   └── create-user.dto.ts
@@ -94,12 +93,20 @@ $ npm run start:prod
 │   │           ├── mongo/
 │   │           └── redis/        
 │   └── main.ts
-└── test
-    └── user
-        └── domain
-            ├── UserMother.ts
-            └── UserEmailMother.ts
+└── test                          # mirror of src/: all tests live here
+    ├── user
+    │   ├── domain                # Object Mothers (test data)
+    │   │   ├── UserMother.ts
+    │   │   └── UserEmailMother.ts
+    │   └── application
+    │       ├── get-all-users/
+    │       │   └── GetAllUsers.spec.ts
+    │       └── user-creator/
+    │           └── UserCreator.spec.ts
+    └── app.e2e-spec.ts
 ```
+
+`src/` contains production code only: no specs, Object Mothers or test libraries (`npm run lint` enforces it).
 
 
 ## Path aliases
