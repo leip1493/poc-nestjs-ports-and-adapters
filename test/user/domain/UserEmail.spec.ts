@@ -34,4 +34,14 @@ describe('UserEmail', () => {
   ])('rejects "%s"', (email) => {
     expect(() => new UserEmail(email)).toThrow(InvalidArgument);
   });
+
+  // values come from untyped HTTP bodies at runtime
+  it.each([123, null, undefined, ['ada@example.com']])(
+    'rejects a non-string (%p)',
+    (email) => {
+      expect(() => new UserEmail(email as unknown as string)).toThrow(
+        InvalidArgument,
+      );
+    },
+  );
 });

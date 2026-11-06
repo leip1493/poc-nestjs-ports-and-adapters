@@ -23,4 +23,13 @@ describe('Uuid', () => {
       expect(() => new Uuid(value)).toThrow(InvalidArgument);
     },
   );
+
+  it.each([123, null, undefined, [randomUUID()]])(
+    'rejects a non-string (%p)',
+    (value) => {
+      expect(() => new Uuid(value as unknown as string)).toThrow(
+        InvalidArgument,
+      );
+    },
+  );
 });

@@ -14,4 +14,14 @@ describe('UserName', () => {
   it.each(['', '   '])('rejects a blank name ("%s")', (name) => {
     expect(() => new UserName(name)).toThrow(InvalidArgument);
   });
+
+  // values come from untyped HTTP bodies at runtime
+  it.each([123, null, undefined, ['Ada']])(
+    'rejects a non-string (%p)',
+    (name) => {
+      expect(() => new UserName(name as unknown as string)).toThrow(
+        InvalidArgument,
+      );
+    },
+  );
 });

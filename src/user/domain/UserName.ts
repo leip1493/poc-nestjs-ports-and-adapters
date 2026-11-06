@@ -6,7 +6,7 @@ export class UserName {
   }
 
   private ensureNameIsValid(value: string): void {
-    if (!value?.trim()) {
+    if (typeof value !== 'string' || !value.trim()) {
       throw new InvalidArgument(`${this.constructor.name} is required`);
     }
   }

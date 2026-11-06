@@ -9,7 +9,7 @@ export class UserEmail {
   }
 
   private ensureEmailIsValid(value: string): void {
-    if (!EMAIL_REGEX.test(value)) {
+    if (typeof value !== 'string' || !EMAIL_REGEX.test(value)) {
       throw new InvalidArgument(`${value} isn't a valid email`);
     }
   }

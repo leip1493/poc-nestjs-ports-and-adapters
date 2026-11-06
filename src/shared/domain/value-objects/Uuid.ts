@@ -14,7 +14,7 @@ export class Uuid {
   }
 
   private ensureIsValidUuid(id: string): void {
-    if (!UUID_REGEX.test(id)) {
+    if (typeof id !== 'string' || !UUID_REGEX.test(id)) {
       throw new InvalidArgument(
         `<${this.constructor.name}> does not allow the value <${id}>`,
       );
