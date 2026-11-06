@@ -10,6 +10,12 @@ A starting point for NestJS services built with the Ports and Adapters (Hexagona
 
 **Stack:** Node.js 24 · NestJS 12 · TypeScript 6 · TypeORM 1 + SQLite (in memory) · Jest 30 · oxlint · Docker
 
+## Background
+
+I built this template as a personal project. It later became the foundation of the standard template I created for Node.js APIs at a company I worked for. That template is now part of the company's internal developer platform, where a scaffolding wizard uses it to generate new Node.js API services.
+
+This repository is the original personal project. It doesn't include the company's version, its changes or any proprietary code.
+
 ## Start a new project from this template
 
 1. Copy the repository without its history: use **Use this template** on GitHub, or `npx degit leip1493/poc-nestjs-ports-and-adapters my-service`.
