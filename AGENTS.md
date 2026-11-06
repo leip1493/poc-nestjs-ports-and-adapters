@@ -9,7 +9,7 @@ A **template** of the Ports and Adapters (Hexagonal) architecture with NestJS 12
 - **Tests live in `test/`, mirroring `src/`.** No test code in `src/`. Test data comes from Object Mothers. → [testing.md](docs/agents/testing.md)
 - **Imports:** use `@/*` (src) and `@test/*` (test) for anything outside the current folder. No `../`. → [conventions.md](docs/agents/conventions.md)
 - **Before finishing:** `npm run build`, `npm test`, `npm run test:e2e` and `npm run lint` must pass.
-- **Git:** work on a branch and open a PR to `master`. The `pre-ai` branch is a frozen snapshot of the pre-AI code: never commit, rebase or push to it.
+- **Git:** work on a branch and open a PR to `master`. Commit messages follow Conventional Commits (`feat:`, `fix:`, `test:`, `refactor:`, `docs:`, `chore:`). The `pre-ai` branch is a frozen snapshot of the pre-AI code: never commit, rebase or push to it.
 
 ## Commands
 

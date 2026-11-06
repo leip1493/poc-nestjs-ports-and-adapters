@@ -15,7 +15,7 @@ Read this before writing or changing tests. The process to follow is in [tdd.md]
 | Domain | Value objects and entities: valid values, every invalid value, boundaries. No mocks. | `test/user/domain/UserEmail.spec.ts` |
 | Application | Use cases with mocked ports: happy path, each failure, what must not happen. | `test/user/application/user-finder/UserFinder.spec.ts` |
 | Infrastructure | Adapters against a real in-memory database (integration). | `test/user/infrastructure/persistence/TypeOrmUserRepository.spec.ts` |
-| HTTP | e2e through the full `AppModule`: routes and status codes. | `test/app.e2e-spec.ts` |
+| HTTP | e2e through the full `AppModule`: routes and status codes, including 400s for malformed bodies. | `test/user/user.e2e-spec.ts` |
 
 ## How
 
@@ -25,5 +25,7 @@ Read this before writing or changing tests. The process to follow is in [tdd.md]
 - **Always `await`** async assertions: `await expect(promise).resolves...` / `.rejects...`. Without the `await`, the test passes even when it should fail.
 - Use `toHaveBeenCalledWith`, not `toBeCalledWith` (removed in Jest 30).
 - **Adapter integration tests** build a Nest testing module with `SqliteTypeormClient.create()`, `TypeOrmModule.forFeature([...])` and the adapter, and `close()` it in `afterEach`.
-- **e2e tests** (`test/*.e2e-spec.ts`) boot the full `AppModule` against in-memory SQLite, take their data from Mothers too, and must `app.close()` in `afterEach`.
+- **e2e tests** (`test/<module>/<module>.e2e-spec.ts`) boot the full `AppModule` against in-memory SQLite, take their data from Mothers too, and must `app.close()` in `afterEach`.
 - Every new use case needs unit tests for the happy path and for each validation failure.
+- Run one file while iterating: `npm test -- UserFinder` (or `npm run test:e2e -- user`).
+- No `it.todo` may be left when a task is finished.

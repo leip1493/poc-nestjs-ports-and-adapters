@@ -45,3 +45,4 @@ The Jest scripts run with `node --experimental-vm-modules` (needed to load Nest'
 - `EBADENGINE` warnings from `@nestjs/schematics` / `@angular-devkit/*`: Node is older than 24.15. They are harmless, but upgrade Node.
 - nvm-windows does not read `.nvmrc`; run `nvm use 24` explicitly.
 - TypeORM 1 removed the `sqlite` driver: use `type: 'better-sqlite3'`.
+- `request returned Internal Server Error for API route ... dockerDesktopLinuxEngine` on any `docker` command: Docker Desktop's engine is hung, not the project. Restart Docker Desktop (or `wsl --shutdown` and reopen it).
