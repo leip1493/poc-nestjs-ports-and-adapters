@@ -4,6 +4,13 @@
   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF7pFog-jh7-T4VXWO84RPFAZCZI0UZc9KyQ&usqp=CAU" width="200" alt="Ports and adapters" />
 </p>
 
+> [!NOTE]
+> ### 🛠️ Hecho a mano — código pre-IA
+> Este branch (`pre-ai`) conserva el código tal como lo escribí **antes de la era de la IA**: cada línea pensada, investigada e implementada a mano, con conocimiento y oficio.
+> Queda como recuerdo artesanal de esa época. No se modifica; la evolución del template continúa en `master`.
+>
+> _Handcrafted, pre-AI code. Kept as a memento of when every line was written by hand. Frozen on purpose: ongoing work lives in `master`._
+
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
