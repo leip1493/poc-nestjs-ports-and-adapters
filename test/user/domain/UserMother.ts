@@ -1,4 +1,4 @@
-import { User } from '../../../src/user/domain/User';
+import { User } from '@/user/domain/User';
 import { UserNameMother } from './UserNameMother';
 import { UserEmailMother } from './UserEmailMother';
 import { UserIdMother } from './UserIdMother';

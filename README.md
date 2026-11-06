@@ -102,6 +102,17 @@ $ npm run start:prod
 ```
 
 
+## Path aliases
+
+Two generic aliases, defined once in `tsconfig.json` (`paths`), work for any new module without extra config:
+
+| Alias | Points to | Example |
+|---|---|---|
+| `@/*` | `src/*` | `import { User } from '@/user/domain/User';` |
+| `@test/*` | `test/*` | `import { UserMother } from '@test/user/domain/UserMother';` |
+
+Same-folder imports stay relative (`./UserCreatorRequest`). `nest build` rewrites the aliases to relative paths in `dist`, and Jest maps them in `jest.config.js` / `test/jest-e2e.json`.
+
 ## Test
 
 ```bash

@@ -1,4 +1,4 @@
-import { UserCreatorRequest } from '../../application/user-creator/UserCreatorRequest';
+import { UserCreatorRequest } from '@/user/application/user-creator/UserCreatorRequest';
 
 export class CreateUserDto implements Omit<UserCreatorRequest, 'id'> {
   name: string;

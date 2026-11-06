@@ -1,7 +1,7 @@
 import { MockProxy, mock } from 'jest-mock-extended';
-import { InvalidArgument } from '../../../shared/domain/exceptions/InvalidArgument';
-import { UserMother } from '../../../../test/user/domain/UserMother';
-import { UserRepository } from '../../domain/UserRepository';
+import { InvalidArgument } from '@/shared/domain/exceptions/InvalidArgument';
+import { UserMother } from '@test/user/domain/UserMother';
+import { UserRepository } from '@/user/domain/UserRepository';
 import { UserCreator } from './UserCreator';
 import { UserCreatorRequest } from './UserCreatorRequest';
 

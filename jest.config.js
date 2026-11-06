@@ -8,4 +8,9 @@ module.exports = {
   collectCoverageFrom: ['**/*.(t|j)s'],
   coverageDirectory: '../coverage',
   testEnvironment: 'node',
+  // aliases from tsconfig.json paths
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
+    '^@test/(.*)$': '<rootDir>/../test/$1',
+  },
 };

@@ -1,4 +1,4 @@
-import { InvalidArgument } from '../../shared/domain/exceptions/InvalidArgument';
+import { InvalidArgument } from '@/shared/domain/exceptions/InvalidArgument';
 
 export class UserName {
   constructor(readonly value: string) {
