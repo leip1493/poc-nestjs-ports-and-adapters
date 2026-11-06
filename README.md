@@ -4,6 +4,8 @@
 
 # NestJS · Ports and Adapters template
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/leip1493/poc-nestjs-ports-and-adapters)
+
 A starting point for NestJS services built with the Ports and Adapters (Hexagonal) architecture: domain logic is isolated from frameworks and infrastructure, and every layer is tested.
 
 **Stack:** Node.js 24 · NestJS 12 · TypeScript 6 · TypeORM 1 + SQLite (in memory) · Jest 30 · oxlint · Docker
