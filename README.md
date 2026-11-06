@@ -24,19 +24,24 @@ $ npm install
 ## Running the app
 Running Locally
 - Using Docker
-To run the NestJS application using Docker, follow these steps:
-
-Build the Docker image:
-```bash
-docker compose build
-```
-
-Start the application:
+Development, with hot reload (`Dockerfile.dev`):
 ```bash
 docker compose up
 ```
 
-This starts the NestJS application with an in-memory SQLite database (better-sqlite3).
+The source code is mounted into the container and `npm run start:dev` recompiles and restarts on every change (a few seconds, it uses polling so it also works on Windows/macOS).
+Rebuild only when `package.json` changes:
+```bash
+docker compose up --build --renew-anon-volumes
+```
+
+Production image (`Dockerfile`):
+```bash
+docker build -t poc-nestjs-ports-and-adapters .
+docker run -p 3000:3000 poc-nestjs-ports-and-adapters
+```
+
+Both start the NestJS application with an in-memory SQLite database (better-sqlite3).
 Access the application at http://localhost:3000 (Swagger UI at http://localhost:3000/api)
 
 - Without Docker
