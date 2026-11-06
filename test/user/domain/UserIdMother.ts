@@ -1,4 +1,4 @@
-import { UserId } from 'src/user/domain/UserId';
+import { UserId } from '../../../src/user/domain/UserId';
 
 export class UserIdMother {
   static create(value?: string): UserId {

@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "rules": {
+    "typescript/no-explicit-any": "off",
+    "typescript/no-floating-promises": "error"
+  },
+  "env": {
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.spec.ts"
+      ],
+      "rules": {
+        "typescript/unbound-method": "off"
+      }
+    }
+  ]
+}

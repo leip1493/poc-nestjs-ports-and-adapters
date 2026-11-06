@@ -11,6 +11,10 @@
 This repository serves as a proof of concept for implementing the Ports and Adapters (Hexagonal) architecture pattern using NestJS. The structure emphasizes a clear separation between application logic and external dependencies, promoting maintainability and testability.
 
 
+## Requirements
+
+- Node.js 24 (`nvm use`)
+
 ## Installation
 
 ```bash
@@ -24,16 +28,16 @@ To run the NestJS application using Docker, follow these steps:
 
 Build the Docker image:
 ```bash
-docker-compose build
+docker compose build
 ```
 
 Start the application:
 ```bash
-docker-compose build
+docker compose up
 ```
 
-This will start the NestJS application and an SQLite database in separate containers.
-Access the application at http://localhost:3000
+This starts the NestJS application with an in-memory SQLite database (better-sqlite3).
+Access the application at http://localhost:3000 (Swagger UI at http://localhost:3000/api)
 
 - Without Docker
 If you prefer not to use Docker, you can run the application locally with the following command:

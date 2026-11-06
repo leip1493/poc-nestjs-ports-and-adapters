@@ -1,7 +1,7 @@
-import { InvalidArgument } from 'src/shared/domain/exceptions/InvalidArgument';
+import { InvalidArgument } from '../../shared/domain/exceptions/InvalidArgument';
 
 export class UserEmail {
-  private readonly regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  private readonly regex = /^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
   constructor(readonly value: string) {
     this.ensureEmailIsValid(value);

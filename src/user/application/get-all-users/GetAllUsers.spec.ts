@@ -12,18 +12,18 @@ describe('GetAllUsers', () => {
     SUT = new GetAllUsers(mockRepository);
   });
 
-  it('get empty list of users', () => {
+  it('get empty list of users', async () => {
     mockRepository.getAll.mockResolvedValue([]);
 
-    expect(SUT.execute()).resolves.toHaveLength(0);
+    await expect(SUT.execute()).resolves.toHaveLength(0);
   });
 
-  it('get two user from list', () => {
+  it('get two user from list', async () => {
     mockRepository.getAll.mockResolvedValue([
       UserMother.create(),
       UserMother.create(),
     ]);
 
-    expect(SUT.execute()).resolves.toHaveLength(2);
+    await expect(SUT.execute()).resolves.toHaveLength(2);
   });
 });

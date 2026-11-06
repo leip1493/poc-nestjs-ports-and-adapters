@@ -1,5 +1,5 @@
-import { User } from 'src/user/domain/User';
-import { UserRepository } from 'src/user/domain/UserRepository';
+import { User } from '../../domain/User';
+import { UserRepository } from '../../domain/UserRepository';
 import { UserCreatorRequest } from './UserCreatorRequest';
 import { Injectable } from '@nestjs/common';
 
