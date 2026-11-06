@@ -1,0 +1,41 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "rules": {
+    "typescript/no-explicit-any": "off",
+    "typescript/no-floating-promises": "error"
+  },
+  "env": {
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": ["src/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@test/**",
+                  "@nestjs/testing",
+                  "@faker-js/faker",
+                  "@faker-js/faker/*",
+                  "jest-mock-extended",
+                  "supertest"
+                ],
+                "message": "Production code (src/) must not depend on test code or test libraries."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["**/*.spec.ts"],
+      "rules": {
+        "typescript/unbound-method": "off"
+      }
+    }
+  ]
+}

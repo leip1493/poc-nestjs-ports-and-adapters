@@ -1,8 +1,4 @@
 import { Exception } from './Exception';
 
-export class InvalidArgument extends Exception {
-  constructor(message: string) {
-    super(message);
-    this.name = this.constructor.name;
-  }
-}
+/** A value breaks a domain rule. Mapped to HTTP 400. */
+export class InvalidArgument extends Exception {}

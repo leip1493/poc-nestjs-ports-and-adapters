@@ -1,17 +1,29 @@
-import { User } from 'src/user/domain/User';
-import { UserRepository } from 'src/user/domain/UserRepository';
-import { UserService } from '../user.service';
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from '@/user/domain/User';
+import { UserId } from '@/user/domain/UserId';
+import { UserRepository } from '@/user/domain/UserRepository';
+import { TypeOrmUser } from './typeorm/TypeOrmUser';
 
 @Injectable()
 export class TypeOrmUserRepository implements UserRepository {
-  constructor(private readonly service: UserService) {}
+  constructor(
+    @InjectRepository(TypeOrmUser)
+    private readonly repository: Repository<TypeOrmUser>,
+  ) {}
 
   async save(user: User): Promise<void> {
-    await this.service.create(user);
+    await this.repository.save(this.repository.create(user.toPrimitives()));
   }
 
-  getAll(): Promise<User[]> {
-    return this.service.findAll();
+  async getAll(): Promise<User[]> {
+    const rows = await this.repository.find();
+    return rows.map((row) => User.fromPrimitives(row));
+  }
+
+  async search(id: UserId): Promise<User | null> {
+    const row = await this.repository.findOneBy({ id: id.value });
+    return row ? User.fromPrimitives(row) : null;
   }
 }

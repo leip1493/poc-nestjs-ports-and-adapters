@@ -34,3 +34,6 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 in-memory-db
+
+# TypeScript incremental
+*.tsbuildinfo

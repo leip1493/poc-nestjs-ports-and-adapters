@@ -1,4 +1,4 @@
-import { InvalidArgument } from 'src/shared/domain/exceptions/InvalidArgument';
+import { InvalidArgument } from '@/shared/domain/exceptions/InvalidArgument';
 
 export class UserName {
   constructor(readonly value: string) {
@@ -6,7 +6,7 @@ export class UserName {
   }
 
   private ensureNameIsValid(value: string): void {
-    if (!value) {
+    if (typeof value !== 'string' || !value.trim()) {
       throw new InvalidArgument(`${this.constructor.name} is required`);
     }
   }

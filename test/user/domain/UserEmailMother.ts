@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker/locale/en';
-import { UserEmail } from 'src/user/domain/UserEmail';
+import { UserEmail } from '@/user/domain/UserEmail';
 
 export class UserEmailMother {
   static create(value?: string): UserEmail {

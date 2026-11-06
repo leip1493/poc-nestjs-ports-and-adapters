@@ -1,11 +1,18 @@
-version: '3.8'
-
+# Development environment with hot reload. Production image: `docker build .`
 services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
+    # always (re)build on `up` so a stale image is never reused (cached, takes seconds)
+    pull_policy: build
     ports:
-      - "3000:3000"    
+      - '3000:3000'
+    volumes:
+      - .:/app
+      # keep the container's Linux node_modules (better-sqlite3 is native)
+      - /app/node_modules
     environment:
-      NODE_ENV: production      
+      # file events don't cross Windows/macOS bind mounts: make tsc watch poll
+      TSC_WATCHFILE: DynamicPriorityPolling
+      TSC_WATCHDIRECTORY: RecursiveDirectoryUsingDynamicPriorityPolling

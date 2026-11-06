@@ -1,0 +1,7 @@
+# Development image: source is bind-mounted by docker-compose and Nest reloads on change
+FROM node:24-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+EXPOSE 3000
+CMD ["npm", "run", "start:dev"]
