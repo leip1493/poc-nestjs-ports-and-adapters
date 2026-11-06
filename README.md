@@ -11,7 +11,7 @@ A starting point for NestJS services built with the Ports and Adapters (Hexagona
 ## Start a new project from this template
 
 1. Copy the repository without its history: use **Use this template** on GitHub, or `npx degit leip1493/poc-nestjs-ports-and-adapters my-service`.
-2. Set `name`, `description` and `author` in `package.json`.
+2. Set `name`, `description`, `author` and `license` in `package.json`, and replace `LICENSE` with your project's own.
 3. Install and check that everything passes:
    ```bash
    nvm use 24        # Node >= 24.15 (nvm-windows: nvm use 24)
@@ -56,9 +56,10 @@ test/                             # mirror of src/: every test lives here
 ├── user/
 │   ├── domain/                   # Object Mothers + entity and value object specs
 │   ├── application/              # use case specs (ports mocked)
-│   └── infrastructure/           # adapter integration specs (real in-memory DB)
+│   ├── infrastructure/           # adapter integration specs (real in-memory DB)
+│   └── user.e2e-spec.ts          # HTTP e2e for the module
 ├── shared/
-└── app.e2e-spec.ts               # e2e
+└── app.e2e-spec.ts               # app-level e2e
 ```
 
 - Dependencies point inwards: `infrastructure -> application -> domain`.
@@ -78,3 +79,7 @@ Features are built test-first (TDD).
 ## Working with AI agents
 
 Rules and context for coding agents live in [AGENTS.md](AGENTS.md) (Claude Code reads it through `CLAUDE.md`). It is a short index: the detail is in [docs/agents/](docs/agents/), loaded only when a task needs it.
+
+## License
+
+[MIT](LICENSE)
